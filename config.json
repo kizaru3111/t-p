@@ -1,0 +1,32 @@
+{
+    "fonts": {
+        "tahoma": "fonts/tahoma.ttf",
+        "times": "fonts/times.ttf"
+    },
+    "paths": {
+        "source_pdf": "source_pdf_path.pdf",
+        "result_file": "modified.pdf",
+        "upload_dir": "uploads",
+        "patches_dir": "patches",
+        "logs_dir": "logs"
+    },
+    "limits": {
+        "max_file_size": 10485760,
+        "max_retries": 3
+    },
+    "cleaning": {
+        "temp_files_ttl": 3600,
+        "enable_auto_cleanup": true
+    },
+    "updates": {
+        "patch_update_interval": 21600
+    },
+    "logging": {
+        "level": "INFO",
+        "format": "%(asctime)s - %(levelname)s - %(message)s",
+        "rotation": {
+            "max_size": 5242880,
+            "backup_count": 5
+        }
+    }
+}

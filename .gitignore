@@ -1,0 +1,34 @@
+# Конфиденциальные данные
+.env
+*.env
+
+# Логи
+logs/
+*.log
+
+# Временные файлы и загрузки
+uploads/
+patches/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env/
+.venv/
+
+# Временные PDF файлы
+*.pdf
+!source_pdf_path.pdf
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
