@@ -1,13 +1,13 @@
 {
     "fonts": {
-        "tahoma": "/tmp/fonts/tahoma.ttf",
-        "times": "/tmp/fonts/times.ttf"
+        "tahoma": "fonts/tahoma.ttf",
+        "times": "fonts/times.ttf"
     },
     "paths": {
-        "source_pdf": "/tmp/source_pdf_path.pdf",
-        "result_file": "/tmp/modified.pdf",
+        "source_pdf": "source_pdf_path.pdf",
+        "result_file": "modified.pdf",
         "upload_dir": "/tmp/uploads",
-        "patches_dir": "/tmp/patches",
+        "patches_dir": "patches",
         "logs_dir": "/tmp/logs"
     },
     "limits": {
