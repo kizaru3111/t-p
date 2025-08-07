@@ -20,43 +20,14 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('/tmp/logs/pdf_editor.log', encoding='utf-8'),
+        logging.FileHandler(os.path.join('logs', 'pdf_editor.log'), encoding='utf-8'),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger(__name__)
 
-# Создание директорий для логов
-import os
-import re
-import sys
-import json
-import logging
-import traceback
-from typing import Optional, Dict, Any, Union, Tuple
-from pathlib import Path
-from dataclasses import dataclass
-from datetime import datetime
-import tkinter.messagebox as messagebox
-try:
-    import fitz
-except ImportError:
-    print("❌ PyMuPDF не установлен. Установите его командой: pip install PyMuPDF")
-    sys.exit(1)
-
-# Создание директории для логов до настройки логирования
-os.makedirs('/tmp/logs', exist_ok=True)
-
-# Настройка логирования
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('/tmp/logs/pdf_editor.log', encoding='utf-8'),
-        logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger(__name__)
+# Создание директорий
+os.makedirs('logs', exist_ok=True)
 
 # Пути
 current_dir = os.path.dirname(os.path.abspath(__file__))

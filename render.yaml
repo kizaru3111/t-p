@@ -3,7 +3,7 @@ services:
     name: pdf-bot
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: bash render_setup.sh && python bot.py
+    startCommand: python bot.py
     envVars:
       - key: BOT_TOKEN
         sync: false

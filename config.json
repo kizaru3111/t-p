@@ -5,10 +5,10 @@
     },
     "paths": {
         "source_pdf": "source_pdf_path.pdf",
-        "result_file": "/tmp/modified.pdf",
-        "upload_dir": "/tmp/uploads",
-        "patches_dir": "/tmp/patches",
-        "logs_dir": "/tmp/logs"
+        "result_file": "modified.pdf",
+        "upload_dir": "uploads",
+        "patches_dir": "patches",
+        "logs_dir": "logs"
     },
     "limits": {
         "max_file_size": 10485760,

@@ -6,10 +6,14 @@ import logging
 from dotenv import load_dotenv
 from pathlib import Path
 
-# Создание необходимых директорий до импорта модулей
-os.makedirs('/tmp/logs', exist_ok=True)
-os.makedirs('/tmp/uploads', exist_ok=True)
-os.makedirs('/tmp/patches', exist_ok=True)
+# Инициализация путей и проверка наличия файлов
+from paths import init_paths
+try:
+    init_paths()
+    logging.info("✓ Все необходимые пути инициализированы")
+except FileNotFoundError as e:
+    logging.error(f"❌ Ошибка инициализации путей: {e}")
+    raise
 
 # Aiogram imports
 from aiogram import Bot, Dispatcher, types
