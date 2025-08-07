@@ -27,8 +27,12 @@ from pdf_editor import PatchExtractor, coordinates
 async def ensure_patches_exist(bot):
     """Проверяет наличие патчей и создает их при необходимости"""
     try:
-        extractor = PatchExtractor(source_pdf_path="source_pdf_path.pdf")
-        patches_dir = os.path.join(os.path.dirname(__file__), "patches")
+        from config_loader import Config
+        config = Config().get_config()
+        
+        logger.info("Инициализация PatchExtractor...")
+        extractor = PatchExtractor(source_pdf_path=config['paths']['source_pdf'])
+        patches_dir = config['paths']['patches_dir']
         
         # Проверяем наличие патчей
         existing_patches = os.listdir(patches_dir) if os.path.exists(patches_dir) else []
