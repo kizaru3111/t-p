@@ -20,7 +20,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(os.path.join('logs', 'pdf_editor.log'), encoding='utf-8'),
+        logging.FileHandler('/tmp/logs/pdf_editor.log', encoding='utf-8'),
         logging.StreamHandler()
     ]
 )

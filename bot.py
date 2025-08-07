@@ -18,8 +18,10 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 # Local imports
 from pdf_editor import PatchExtractor, coordinates
 
-# Создание директории для логов
-os.makedirs('logs', exist_ok=True)
+# Создание директорий
+os.makedirs('/tmp/logs', exist_ok=True)
+os.makedirs('/tmp/uploads', exist_ok=True)
+os.makedirs('/tmp/patches', exist_ok=True)
 
 # Функция для проверки и создания патчей
 async def ensure_patches_exist(bot):
@@ -62,7 +64,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('logs/bot.log', encoding='utf-8'),
+        logging.FileHandler('/tmp/logs/bot.log', encoding='utf-8'),
         logging.StreamHandler()
     ]
 )
@@ -75,7 +77,7 @@ TOKEN = os.getenv('BOT_TOKEN')
 if not TOKEN:
     raise ValueError("BOT_TOKEN не найден в переменных окружения")
 
-UPLOAD_DIR = os.path.normpath('d:/fkfjf/uploads')
+UPLOAD_DIR = '/tmp/uploads'
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
 
 bot = Bot(token=TOKEN)
