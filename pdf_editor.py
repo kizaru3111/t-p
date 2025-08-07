@@ -26,8 +26,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Создание директорий
-os.makedirs('logs', exist_ok=True)
+# Создание директорий для логов
+os.makedirs('/tmp/logs', exist_ok=True)
 
 # Пути
 current_dir = os.path.dirname(os.path.abspath(__file__))
