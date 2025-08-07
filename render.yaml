@@ -1,0 +1,11 @@
+services:
+  - type: worker
+    name: pdf-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash render_setup.sh && python bot.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.0
