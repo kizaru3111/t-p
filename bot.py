@@ -6,6 +6,11 @@ import logging
 from dotenv import load_dotenv
 from pathlib import Path
 
+# Создание необходимых директорий до импорта модулей
+os.makedirs('/tmp/logs', exist_ok=True)
+os.makedirs('/tmp/uploads', exist_ok=True)
+os.makedirs('/tmp/patches', exist_ok=True)
+
 # Aiogram imports
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import FSInputFile, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
@@ -17,11 +22,6 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 # Local imports
 from pdf_editor import PatchExtractor, coordinates
-
-# Создание директорий
-os.makedirs('/tmp/logs', exist_ok=True)
-os.makedirs('/tmp/uploads', exist_ok=True)
-os.makedirs('/tmp/patches', exist_ok=True)
 
 # Функция для проверки и создания патчей
 async def ensure_patches_exist(bot):
