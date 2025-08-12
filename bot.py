@@ -463,8 +463,14 @@ async def main():
     # Запускаем периодическое обновление патчей в фоновом режиме
     asyncio.create_task(periodic_patches_update(bot))
     
-    # Запускаем бота
-    await dp.start_polling(bot)
+    # Получаем порт из переменной окружения или используем 10000 по умолчанию
+    port = int(os.getenv("PORT", 10000))
+    
+    # Запускаем бота с веб-сервером
+    await dp.start_polling(bot, allowed_updates=["message", "callback_query"])
+    
+    # Выводим информацию о порте
+    print(f"🚀 Бот запущен и слушает порт {port}")
 
 if __name__ == '__main__':
     asyncio.run(main())
