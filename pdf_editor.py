@@ -56,13 +56,13 @@ def find_first_pdf(exclude: Optional[set] = None) -> Optional[str]:
             return os.path.join(current_dir, fname)
     return None
 
-# Получаем имя входного PDF из аргумента командной строки или ищем первый подходящий PDF
+# Получаем имя входного PDF из аргумента командной строки или используем source_pdf_path.pdf
 if len(sys.argv) > 1:
     pdf_path = os.path.join(current_dir, sys.argv[1])
 else:
-    pdf_path = find_first_pdf(exclude={"source_pdf_path.pdf", "modified.pdf"})
-    if not pdf_path:
-        print("❌ Не найден подходящий PDF-файл для обработки!")
+    pdf_path = os.path.join(current_dir, "source_pdf_path.pdf")
+    if not os.path.exists(pdf_path):
+        print("❌ Файл source_pdf_path.pdf не найден!")
         exit(1)
 
 output_pdf = os.path.join(current_dir, "modified.pdf")

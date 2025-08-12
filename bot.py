@@ -6,15 +6,6 @@ import logging
 from dotenv import load_dotenv
 from pathlib import Path
 
-# Инициализация путей и проверка наличия файлов
-from paths import init_paths
-try:
-    init_paths()
-    logging.info("✓ Все необходимые пути инициализированы")
-except FileNotFoundError as e:
-    logging.error(f"❌ Ошибка инициализации путей: {e}")
-    raise
-
 # Aiogram imports
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import FSInputFile, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
@@ -27,16 +18,15 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 # Local imports
 from pdf_editor import PatchExtractor, coordinates
 
+# Создание директории для логов
+os.makedirs('logs', exist_ok=True)
+
 # Функция для проверки и создания патчей
 async def ensure_patches_exist(bot):
     """Проверяет наличие патчей и создает их при необходимости"""
     try:
-        from config_loader import Config
-        config = Config().get_config()
-        
-        logger.info("Инициализация PatchExtractor...")
-        extractor = PatchExtractor(source_pdf_path=config['paths']['source_pdf'])
-        patches_dir = config['paths']['patches_dir']
+        extractor = PatchExtractor(source_pdf_path="source_pdf_path.pdf")
+        patches_dir = os.path.join(os.path.dirname(__file__), "patches")
         
         # Проверяем наличие патчей
         existing_patches = os.listdir(patches_dir) if os.path.exists(patches_dir) else []
@@ -72,7 +62,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('/tmp/logs/bot.log', encoding='utf-8'),
+        logging.FileHandler('logs/bot.log', encoding='utf-8'),
         logging.StreamHandler()
     ]
 )
@@ -85,7 +75,7 @@ TOKEN = os.getenv('BOT_TOKEN')
 if not TOKEN:
     raise ValueError("BOT_TOKEN не найден в переменных окружения")
 
-UPLOAD_DIR = '/tmp/uploads'
+UPLOAD_DIR = os.path.normpath('d:/fkfjf/uploads')
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
 
 bot = Bot(token=TOKEN)
