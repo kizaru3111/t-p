@@ -2,3 +2,4 @@ aiogram>=3.0
 python-dotenv
 PyMuPDF
 python-telegram-bot
+aiohttp

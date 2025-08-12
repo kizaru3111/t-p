@@ -3,6 +3,7 @@ import json
 import uuid
 import asyncio
 import logging
+from aiohttp import web
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -453,6 +454,10 @@ async def handle_pdf(message: types.Message, state: FSMContext):
             logger.error(f"Ошибка при удалении временных файлов: {e}")
         await state.clear()
 
+async def health_check(request):
+    """Простой HTTP эндпоинт для проверки работоспособности"""
+    return web.Response(text="Bot is running")
+
 async def main():
     if not os.path.exists(UPLOAD_DIR):
         os.makedirs(UPLOAD_DIR)
@@ -466,11 +471,22 @@ async def main():
     # Получаем порт из переменной окружения или используем 10000 по умолчанию
     port = int(os.getenv("PORT", 10000))
     
-    # Запускаем бота с веб-сервером
-    await dp.start_polling(bot, allowed_updates=["message", "callback_query"])
+    # Создаем веб-приложение
+    app = web.Application()
+    app.router.add_get("/", health_check)
     
-    # Выводим информацию о порте
-    print(f"🚀 Бот запущен и слушает порт {port}")
+    # Запускаем веб-сервер
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, "0.0.0.0", port)
+    
+    # Запускаем бота и веб-сервер
+    await asyncio.gather(
+        site.start(),
+        dp.start_polling(bot, allowed_updates=["message", "callback_query"])
+    )
+    
+    print(f"🚀 Бот и веб-сервер запущены на порту {port}")
 
 if __name__ == '__main__':
     asyncio.run(main())
